@@ -1,5 +1,5 @@
 import { shortlistStore }
-from "@/lib/shortlistStore";
+from "../../../../lib/shortlistStore";
 import {
   NextRequest,
   NextResponse,
