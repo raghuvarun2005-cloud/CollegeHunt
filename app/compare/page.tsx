@@ -308,7 +308,7 @@ export default function ComparePage() {
 
             {bestCollege === college1.id && (
 
-              <div className="mb-6 inline-block bg-[#FFF1F2] text-[#FF385C] px-5 py-2 rounded-full text-sm font-semibold">
+              <div className="mb-6 inline-block bg-[#FFF1F2] text-[#FF385C] px-4 py-2 rounded-full text-sm font-semibold">
 
                 Best Match
 
@@ -367,7 +367,7 @@ export default function ComparePage() {
                 </span>
 
                 <span className="font-semibold">
-                  {college1.placements}
+                  {college1.placements}%
                 </span>
 
               </div>
@@ -461,7 +461,7 @@ export default function ComparePage() {
                 </span>
 
                 <span className="font-semibold">
-                  {college2.placements}
+                  {college2.placements}%
                 </span>
 
               </div>
