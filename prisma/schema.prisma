@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,4 +5,126 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model College {
+
+  id                  String   @id @default(cuid())
+
+  name                String
+
+  city                String
+
+  state               String
+
+  type                String
+
+  nirf_rank           Int
+
+  established         Int
+
+  image               String
+
+  rating              Float
+
+  placements          String
+
+  createdAt           DateTime @default(now())
+
+  updatedAt           DateTime @updatedAt
+
+  streams             Stream[]
+
+  courseFees          CourseFee[]
+
+  placementStats      PlacementStat[]
+
+  admissionCutoffs    AdmissionCutoff[]
+
+  reviews             Review[]
+
+}
+
+model Stream {
+
+  id          String   @id @default(cuid())
+
+  name        String
+
+  collegeId   String
+
+  college     College @relation(fields: [collegeId], references: [id])
+
+}
+
+model CourseFee {
+
+  id           String   @id @default(cuid())
+
+  course       String
+
+  degree       String
+
+  annual_fee   Int
+
+  collegeId    String
+
+  college      College @relation(fields: [collegeId], references: [id])
+
+}
+
+model PlacementStat {
+
+  id                  String   @id @default(cuid())
+
+  year                Int
+
+  avg_package         Float
+
+  highest_package     Float
+
+  placement_percent   Float
+
+  top_recruiters      String[]
+
+  collegeId           String
+
+  college             College @relation(fields: [collegeId], references: [id])
+
+}
+
+model AdmissionCutoff {
+
+  id              String   @id @default(cuid())
+
+  exam            String
+
+  year            Int
+
+  category        String
+
+  cutoff_value    Float
+
+  collegeId       String
+
+  college         College @relation(fields: [collegeId], references: [id])
+
+}
+
+model Review {
+
+  id            String   @id @default(cuid())
+
+  studentName   String
+
+  rating        Int
+
+  comment       String
+
+  collegeId     String
+
+  createdAt     DateTime @default(now())
+
+  college       College @relation(fields: [collegeId], references: [id])
+
 }

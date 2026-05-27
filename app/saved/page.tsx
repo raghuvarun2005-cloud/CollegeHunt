@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CollegeCard from "@/components/CollegeCard";
+import CollegeCard
+from "../../components/CollegeCard";
 
 export default function SavedPage() {
 

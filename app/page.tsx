@@ -1,130 +1,141 @@
 import Link from "next/link";
 
 export default function HomePage() {
+
   return (
-    <main className="min-h-screen bg-[#030712] text-white overflow-hidden relative">
 
-      {/* Background Glow */}
+    <main className="min-h-screen bg-white">
 
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500/20 blur-[120px] rounded-full"></div>
+      {/* Hero */}
 
-      <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-cyan-500/20 blur-[120px] rounded-full"></div>
+      <section className="max-w-7xl mx-auto px-6 pt-40 pb-24">
 
-      {/* Hero Section */}
+        <div className="text-center">
 
-      <section className="relative z-10 max-w-7xl mx-auto px-6 pt-40 pb-24 flex flex-col items-center text-center">
+          <p className="text-blue-600 font-semibold text-lg">
 
-        {/* Badge */}
+            India’s Smart College Discovery Platform
 
-        <div className="border border-blue-500/20 bg-blue-500/10 text-gray-300 px-5 py-2 rounded-full text-sm">
+          </p>
 
-          🎓 India’s Smart College Discovery Platform
+          <h1 className="mt-6 text-6xl md:text-7xl font-bold leading-tight text-gray-900">
 
-        </div>
+            Discover Your
 
-        {/* Heading */}
+            <span className="block text-blue-600">
 
-        <h1 className="mt-10 text-5xl md:text-7xl font-black leading-tight max-w-5xl">
+              Dream College
 
-          Discover Your
+            </span>
 
-          <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          </h1>
 
-            Dream College
+          <p className="mt-8 text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
 
-          </span>
+            Compare colleges, analyze placements,
+            explore courses and make smarter
+            admission decisions with AI-powered
+            insights.
 
-        </h1>
+          </p>
 
-        {/* Description */}
+          {/* Buttons */}
 
-        <p className="mt-8 text-gray-400 text-lg md:text-xl max-w-3xl leading-relaxed">
+          <div className="flex flex-col sm:flex-row justify-center gap-5 mt-12">
 
-          Compare colleges, analyze placements,
-          explore courses and discover the perfect
-          university for your future career journey.
+            <Link href="/colleges">
 
-        </p>
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl text-lg font-semibold">
 
-        {/* Buttons */}
+                Explore Colleges
 
-        <div className="mt-12 flex flex-col sm:flex-row gap-5">
+              </button>
 
-          <Link href="/colleges">
+            </Link>
 
-            <button className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:opacity-90 px-8 py-4 rounded-2xl text-lg font-semibold transition-all duration-300">
+            <Link href="/compare">
 
-              Explore Colleges →
+              <button className="border border-gray-300 hover:border-gray-500 px-10 py-5 rounded-2xl text-lg font-semibold text-gray-800">
 
-            </button>
+                Compare Colleges
 
-          </Link>
+              </button>
 
-          <Link href="/compare">
+            </Link>
 
-            <button className="border border-white/10 bg-white/5 hover:bg-white/10 px-8 py-4 rounded-2xl text-lg font-semibold transition-all duration-300">
-
-              Compare Colleges →
-
-            </button>
-
-          </Link>
+          </div>
 
         </div>
 
       </section>
 
-      {/* Stats Section */}
+      {/* Features */}
 
-      <section className="relative z-10 max-w-6xl mx-auto px-6 pb-24">
+      <section className="bg-gray-50 py-24">
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="max-w-7xl mx-auto px-6">
 
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center">
+          <div className="grid md:grid-cols-3 gap-8">
 
-            <h2 className="text-5xl font-bold text-white">
-              500+
-            </h2>
+            {/* Card 1 */}
 
-            <p className="mt-3 text-gray-400">
-              Colleges
-            </p>
+            <div className="bg-white border border-gray-200 rounded-3xl p-10">
 
-          </div>
+              <h3 className="text-2xl font-bold text-gray-900">
 
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center">
+                College Comparison
 
-            <h2 className="text-5xl font-bold text-cyan-400">
-              50K+
-            </h2>
+              </h3>
 
-            <p className="mt-3 text-gray-400">
-              Students
-            </p>
+              <p className="mt-5 text-gray-600 leading-relaxed">
 
-          </div>
+                Compare placements, fees,
+                ratings and infrastructure
+                between top colleges.
 
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center">
+              </p>
 
-            <h2 className="text-5xl font-bold text-blue-400">
-              98%
-            </h2>
+            </div>
 
-            <p className="mt-3 text-gray-400">
-              Placements
-            </p>
+            {/* Card 2 */}
 
-          </div>
+            <div className="bg-white border border-gray-200 rounded-3xl p-10">
 
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center">
+              <h3 className="text-2xl font-bold text-gray-900">
 
-            <h2 className="text-5xl font-bold text-cyan-400">
-              4.9
-            </h2>
+                AI Score Engine
 
-            <p className="mt-3 text-gray-400">
-              Ratings
-            </p>
+              </h3>
+
+              <p className="mt-5 text-gray-600 leading-relaxed">
+
+                Personalized weighted score
+                system based on placements,
+                fees and ratings.
+
+              </p>
+
+            </div>
+
+            {/* Card 3 */}
+
+            <div className="bg-white border border-gray-200 rounded-3xl p-10">
+
+              <h3 className="text-2xl font-bold text-gray-900">
+
+                Admission Predictor
+
+              </h3>
+
+              <p className="mt-5 text-gray-600 leading-relaxed">
+
+                Predict admission probability
+                using percentile, exam and
+                category analysis.
+
+              </p>
+
+            </div>
 
           </div>
 
@@ -133,5 +144,7 @@ export default function HomePage() {
       </section>
 
     </main>
+
   );
+
 }

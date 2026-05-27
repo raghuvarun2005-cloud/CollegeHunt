@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CollegeCard from "@/components/CollegeCard";
+
+import CollegeCard
+from "../../components/CollegeCard";
 
 type College = {
   id: string;
@@ -11,13 +13,26 @@ type College = {
   rating: number;
   placements: string;
   image: string;
+  stream?: string;
+  type?: string;
 };
 
 export default function CollegesPage() {
 
-  const [colleges, setColleges] = useState<College[]>([]);
-  const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [colleges, setColleges] =
+    useState<College[]>([]);
+
+  const [search, setSearch] =
+    useState("");
+
+  const [stream, setStream] =
+    useState("");
+
+  const [type, setType] =
+    useState("");
+
+  const [loading, setLoading] =
+    useState(true);
 
   useEffect(() => {
 
@@ -29,7 +44,8 @@ export default function CollegesPage() {
           "/api/colleges"
         );
 
-        const data = await response.json();
+        const data =
+          await response.json();
 
         setColleges(data);
 
@@ -49,65 +65,70 @@ export default function CollegesPage() {
 
   }, []);
 
-  const filteredColleges = colleges.filter(
-    (college) =>
-      college.name
-        .toLowerCase()
-        .includes(search.toLowerCase()) ||
-      college.location
-        .toLowerCase()
-        .includes(search.toLowerCase())
-  );
+  const filteredColleges =
+    colleges.filter((college) => {
+
+      const matchesSearch =
+
+        college.name
+          .toLowerCase()
+          .includes(
+            search.toLowerCase()
+          ) ||
+
+        college.location
+          .toLowerCase()
+          .includes(
+            search.toLowerCase()
+          );
+
+      const matchesStream =
+
+        stream === "" ||
+
+        college.stream === stream;
+
+      const matchesType =
+
+        type === "" ||
+
+        college.type === type;
+
+      return (
+
+        matchesSearch &&
+        matchesStream &&
+        matchesType
+
+      );
+
+    });
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#030712] text-white">
 
-      {/* Background Video */}
+    <main className="min-h-screen bg-white text-gray-900">
 
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-
-        <source src="/bg.mp4" type="video/mp4" />
-
-      </video>
-
-      {/* Dark Overlay */}
-
-      <div className="absolute inset-0 bg-[#030712]/75"></div>
-
-      {/* Glow Effects */}
-
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500/20 blur-[120px] rounded-full"></div>
-
-      <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-cyan-500/20 blur-[120px] rounded-full"></div>
-
-      {/* Content */}
-
-      <div className="relative z-10 px-6 py-32">
+      <div className="max-w-7xl mx-auto px-6 py-32">
 
         {/* Heading */}
 
-        <div className="max-w-7xl mx-auto text-center">
+        <div className="text-center">
 
           <h1 className="text-5xl md:text-6xl font-bold leading-tight">
 
-            Explore Top
+            Discover Top
 
-            <span className="block text-blue-500">
+            <span className="block text-blue-600">
               Colleges
             </span>
 
           </h1>
 
-          <p className="mt-6 text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-6 text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
 
-            Discover the best colleges, compare placements,
-            fees and ratings in one premium platform.
+            Search, compare and shortlist colleges
+            based on placements, rankings and
+            career outcomes.
 
           </p>
 
@@ -119,21 +140,75 @@ export default function CollegesPage() {
 
           <input
             type="text"
-            placeholder="Search colleges or locations..."
+            placeholder="Search colleges or cities..."
             value={search}
             onChange={(e) =>
-              setSearch(e.target.value)
+              setSearch(
+                e.target.value
+              )
             }
-            className="w-full bg-[#111827]/80 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-5 text-lg outline-none focus:border-blue-500 transition-all duration-300"
+            className="w-full bg-white border border-gray-300 rounded-2xl px-6 py-5 text-lg outline-none focus:border-blue-600"
           />
 
         </div>
 
-        {/* Loading State */}
+        {/* Filters */}
+
+        <div className="flex flex-wrap gap-4 mt-8 justify-center">
+
+          <select
+            onChange={(e) =>
+              setStream(
+                e.target.value
+              )
+            }
+            className="border border-gray-300 rounded-xl px-5 py-3 bg-white"
+          >
+
+            <option value="">
+              All Streams
+            </option>
+
+            <option value="Engineering">
+              Engineering
+            </option>
+
+            <option value="Medical">
+              Medical
+            </option>
+
+          </select>
+
+          <select
+            onChange={(e) =>
+              setType(
+                e.target.value
+              )
+            }
+            className="border border-gray-300 rounded-xl px-5 py-3 bg-white"
+          >
+
+            <option value="">
+              All Types
+            </option>
+
+            <option value="Government">
+              Government
+            </option>
+
+            <option value="Private">
+              Private
+            </option>
+
+          </select>
+
+        </div>
+
+        {/* Loading */}
 
         {loading && (
 
-          <div className="text-center mt-20 text-2xl text-gray-400">
+          <div className="text-center mt-20 text-xl text-gray-500">
 
             Loading colleges...
 
@@ -141,13 +216,14 @@ export default function CollegesPage() {
 
         )}
 
-        {/* College Cards */}
+        {/* Cards */}
 
         {!loading && (
 
-          <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 mt-16">
+          <div className="grid md:grid-cols-2 gap-8 mt-16">
 
-            {filteredColleges.map((college) => (
+            {filteredColleges.map(
+              (college) => (
 
               <CollegeCard
                 key={college.id}
@@ -160,11 +236,12 @@ export default function CollegesPage() {
 
         )}
 
-        {/* Empty State */}
+        {/* Empty */}
 
-        {!loading && filteredColleges.length === 0 && (
+        {!loading &&
+          filteredColleges.length === 0 && (
 
-          <div className="text-center mt-20 text-2xl text-gray-400">
+          <div className="text-center mt-20 text-xl text-gray-500">
 
             No colleges found.
 
@@ -175,5 +252,7 @@ export default function CollegesPage() {
       </div>
 
     </main>
+
   );
+
 }

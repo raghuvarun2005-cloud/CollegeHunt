@@ -1,74 +1,69 @@
 import Link from "next/link";
 
 const Footer = () => {
+
   return (
-    <footer className="bg-[#020617] border-t border-white/10 mt-20">
 
-      <div className="max-w-7xl mx-auto px-6 py-14">
+    <footer className="bg-white border-t border-gray-200 mt-24">
 
-        <div className="grid md:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-6 py-20">
 
-          {/* Logo */}
+        <div className="grid md:grid-cols-4 gap-12">
+
+          {/* Brand */}
 
           <div>
 
-            <h1 className="text-3xl font-bold text-white">
+            <h2 className="text-4xl font-bold text-gray-900">
 
               College
-              <span className="text-blue-500">
-                Hub
+
+              <span className="text-blue-600">
+
+                Hunt
+
               </span>
 
-            </h1>
+            </h2>
 
-            <p className="mt-4 text-gray-400 leading-relaxed">
+            <p className="mt-6 text-gray-600 leading-relaxed">
 
-              Discover top colleges, compare placements
-              and build your future career with confidence.
+              Discover top colleges,
+              compare placements and
+              make smarter admission
+              decisions.
 
             </p>
 
           </div>
 
-          {/* Quick Links */}
+          {/* Links */}
 
           <div>
 
-            <h2 className="text-lg font-semibold text-white">
+            <h3 className="text-2xl font-semibold text-gray-900">
 
               Quick Links
 
-            </h2>
+            </h3>
 
-            <div className="mt-5 flex flex-col gap-3 text-gray-400">
+            <div className="flex flex-col gap-4 mt-8 text-gray-600">
 
-              <Link
-  href="/"
-  className="hover:text-white transition"
->
-  Home
-</Link>
+              <Link href="/">
+                Home
+              </Link>
 
-              <Link
-  href="/"
-  className="hover:text-white transition"
->
-  Colleges
-</Link>
+              <Link href="/colleges">
+                Colleges
+              </Link>
 
-              <Link
-  href="/"
-  className="hover:text-white transition"
->
-  Compare
-</Link>
+              <Link href="/compare">
+                Compare
+              </Link>
 
-              <Link
-  href="/"
-  className="hover:text-white transition"
->
-  Login
-</Link>
+              <Link href="/saved">
+                Saved
+              </Link>
 
             </div>
 
@@ -78,13 +73,13 @@ const Footer = () => {
 
           <div>
 
-            <h2 className="text-lg font-semibold text-white">
+            <h3 className="text-2xl font-semibold text-gray-900">
 
               Resources
 
-            </h2>
+            </h3>
 
-            <div className="mt-5 flex flex-col gap-3 text-gray-400">
+            <div className="flex flex-col gap-4 mt-8 text-gray-600">
 
               <p>Top Colleges</p>
 
@@ -102,19 +97,25 @@ const Footer = () => {
 
           <div>
 
-            <h2 className="text-lg font-semibold text-white">
+            <h3 className="text-2xl font-semibold text-gray-900">
 
               Contact
 
-            </h2>
+            </h3>
 
-            <div className="mt-5 flex flex-col gap-3 text-gray-400">
+            <div className="flex flex-col gap-4 mt-8 text-gray-600">
 
-              <p>support@collegehub.com</p>
+              <p>
+                support@collegehunt.com
+              </p>
 
-              <p>+91 8688671829</p>
+              <p>
+                +91 8688671829
+              </p>
 
-              <p>Hyderabad, India</p>
+              <p>
+                Hyderabad, India
+              </p>
 
             </div>
 
@@ -124,16 +125,19 @@ const Footer = () => {
 
         {/* Bottom */}
 
-        <div className="border-t border-white/10 mt-14 pt-8 text-center text-gray-500">
+        <div className="border-t border-gray-200 mt-16 pt-8 text-center text-gray-500">
 
-          © 2026 CollegeHub. All rights reserved.
+          © 2026 CollegeHunt.
+          All rights reserved.
 
         </div>
 
       </div>
 
     </footer>
+
   );
+
 };
 
 export default Footer;

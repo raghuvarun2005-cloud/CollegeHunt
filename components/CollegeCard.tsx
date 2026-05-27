@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import Link from "next/link";
 
 type CollegeCardProps = {
   college: {
@@ -11,6 +13,8 @@ type CollegeCardProps = {
     rating: number;
     placements: string;
     image: string;
+    stream?: string;
+    type?: string;
   };
 };
 
@@ -21,11 +25,7 @@ const CollegeCard = ({
   const [saved, setSaved] =
     useState(false);
 
-  const handleSave = async () => {
-
-  try {
-
-    // Existing colleges
+  useEffect(() => {
 
     const existingColleges =
       JSON.parse(
@@ -34,165 +34,139 @@ const CollegeCard = ({
         ) || "[]"
       );
 
-    // Check exists
-
-    const alreadyExists =
+    const alreadySaved =
       existingColleges.some(
         (item: any) =>
           item.id === college.id
       );
 
-    // UNSAVE
+    setSaved(alreadySaved);
 
-    if (alreadyExists) {
+  }, [college.id]);
 
-      const updatedColleges =
-        existingColleges.filter(
-          (item: any) =>
-            item.id !== college.id
+  const handleSave = async () => {
+
+    try {
+
+      const existingColleges =
+        JSON.parse(
+          localStorage.getItem(
+            "savedColleges"
+          ) || "[]"
         );
 
-      localStorage.setItem(
-        "savedColleges",
-        JSON.stringify(updatedColleges)
+      const alreadyExists =
+        existingColleges.some(
+          (item: any) =>
+            item.id === college.id
+        );
+
+      // UNSAVE
+
+      if (alreadyExists) {
+
+        const updatedColleges =
+          existingColleges.filter(
+            (item: any) =>
+              item.id !== college.id
+          );
+
+        localStorage.setItem(
+          "savedColleges",
+          JSON.stringify(updatedColleges)
+        );
+
+        setSaved(false);
+
+      }
+
+      // SAVE
+
+      else {
+
+        const updatedColleges = [
+          ...existingColleges,
+          college,
+        ];
+
+        localStorage.setItem(
+          "savedColleges",
+          JSON.stringify(updatedColleges)
+        );
+
+        setSaved(true);
+
+      }
+
+      window.dispatchEvent(
+        new Event("storage")
       );
 
-      setSaved(false);
-      window.dispatchEvent(new Event("storage"));
+      await fetch("/api/save-college", {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+
+        body: JSON.stringify(college),
+
+      });
+
+    } catch (error) {
+
+      console.error(error);
 
     }
 
-    // SAVE
-
-    else {
-
-      const updatedColleges = [
-        ...existingColleges,
-        college,
-      ];
-
-      localStorage.setItem(
-        "savedColleges",
-        JSON.stringify(updatedColleges)
-      );
-
-      setSaved(true);
-      window.dispatchEvent(new Event("storage"));
-
-    }
-
-    // Backend API
-
-    await fetch("/api/save-college", {
-
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify(college),
-
-    });
-
-  } catch (error) {
-
-    console.error(error);
-
-  }
-
-};
+  };
 
   return (
-    <div className="bg-[#111827]/80 backdrop-blur-xl border border-gray-800 rounded-3xl overflow-hidden hover:border-blue-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300">
+
+    <div className="bg-white border border-gray-200 rounded-3xl overflow-hidden">
 
       {/* Image */}
 
       <img
         src={college.image}
         alt={college.name}
-        className="w-full h-56 object-cover"
+        className="w-full h-[240px] object-cover"
       />
 
       {/* Content */}
 
-      <div className="p-6">
+      <div className="p-8">
 
-        <h2 className="text-2xl font-bold text-white">
+        {/* Top */}
 
-          {college.name}
+        <div className="flex items-start justify-between gap-4">
 
-        </h2>
+          <div>
 
-        <p className="text-gray-400 mt-2">
+            <h2 className="text-2xl font-bold text-gray-900">
 
-          📍 {college.location}
+              {college.name}
 
-        </p>
+            </h2>
 
-        {/* Stats */}
+            <p className="text-gray-500 mt-2">
 
-        <div className="mt-6 space-y-3 text-gray-300">
+              {college.location}
 
-          <div className="flex justify-between">
-
-            <span>Fees</span>
-
-            <span className="text-white font-medium">
-              {college.fees}
-            </span>
+            </p>
 
           </div>
 
-          <div className="flex justify-between">
-
-            <span>Rating</span>
-
-            <span className="text-yellow-400 font-medium">
-              ⭐ {college.rating}
-            </span>
-
-          </div>
-
-          <div className="flex justify-between">
-
-            <span>Placements</span>
-
-            <span className="text-cyan-400 font-medium">
-              {college.placements}
-            </span>
-
-          </div>
-
-        </div>
-
-        {/* Buttons */}
-
-        <div className="flex gap-4 mt-8">
-
-          {/* View Details */}
-
-          <a
-            href={`/college/${college.id}`}
-            className="flex-1"
-          >
-
-            <button className="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-2xl font-semibold transition">
-
-              View Details
-
-            </button>
-
-          </a>
-
-          {/* Save */}
+          {/* Save Button */}
 
           <button
             onClick={handleSave}
-            className={`w-16 rounded-2xl text-2xl transition ${
+            className={`w-12 h-12 rounded-full border text-xl ${
               saved
-                ? "bg-red-500"
-                : "bg-[#1f2937] hover:bg-[#374151]"
+                ? "bg-red-50 border-red-200"
+                : "border-gray-300"
             }`}
           >
 
@@ -202,10 +176,82 @@ const CollegeCard = ({
 
         </div>
 
+        {/* Stats */}
+
+        <div className="grid grid-cols-3 gap-4 mt-8">
+
+          <div className="bg-gray-50 rounded-2xl p-4">
+
+            <p className="text-sm text-gray-500">
+
+              Fees
+
+            </p>
+
+            <p className="text-lg font-semibold text-gray-900 mt-2">
+
+              {college.fees}
+
+            </p>
+
+          </div>
+
+          <div className="bg-gray-50 rounded-2xl p-4">
+
+            <p className="text-sm text-gray-500">
+
+              Rating
+
+            </p>
+
+            <p className="text-lg font-semibold text-gray-900 mt-2">
+
+              {college.rating}
+
+            </p>
+
+          </div>
+
+          <div className="bg-gray-50 rounded-2xl p-4">
+
+            <p className="text-sm text-gray-500">
+
+              Placement
+
+            </p>
+
+            <p className="text-lg font-semibold text-gray-900 mt-2">
+
+              {college.placements}
+
+            </p>
+
+          </div>
+
+        </div>
+
+        {/* Button */}
+
+        <div className="mt-8">
+
+          <Link href={`/college/${college.id}`}>
+
+            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-semibold">
+
+              View Details
+
+            </button>
+
+          </Link>
+
+        </div>
+
       </div>
 
     </div>
+
   );
+
 };
 
 export default CollegeCard;
