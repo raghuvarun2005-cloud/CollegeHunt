@@ -48,7 +48,7 @@ export async function GET(
 
     filtered =
       filtered.filter(
-        (college: any) =>
+        (college) =>
           college.type
             ?.toLowerCase()
             .includes(

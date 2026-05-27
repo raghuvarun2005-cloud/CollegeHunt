@@ -4,71 +4,93 @@ const Navbar = () => {
 
   return (
 
-    <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200">
+    <header className="sticky top-0 left-0 w-full z-50 bg-white border-b border-[#EBEBEB]">
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8">
 
-        {/* Logo */}
+  <div className="h-20 flex items-center justify-between">
 
-        <Link
-          href="/"
-          className="text-3xl font-bold tracking-tight"
-        >
-
-          <span className="text-gray-900">
-            College
-          </span>
-
-          <span className="text-blue-600">
-            Hunt
-          </span>
-
-        </Link>
-
-        {/* Navigation */}
-
-        <nav className="hidden md:flex items-center gap-10">
+          {/* Logo */}
 
           <Link
             href="/"
-            className="text-gray-700 hover:text-blue-600 text-base"
+            className="text-[30px] font-bold tracking-tight"
           >
-            Home
+
+            <span className="text-[#222222]">
+
+              College
+
+            </span>
+
+            <span className="text-[#FF385C]">
+
+              Hunt
+
+            </span>
+
           </Link>
 
-          <Link
-            href="/colleges"
-            className="text-gray-700 hover:text-blue-600 text-base"
-          >
-            Colleges
-          </Link>
+          {/* Navigation */}
 
-          <Link
-            href="/compare"
-            className="text-gray-700 hover:text-blue-600 text-base"
-          >
-            Compare
-          </Link>
+          <nav className="hidden md:flex items-center gap-10">
 
-          <Link
-            href="/saved"
-            className="text-gray-700 hover:text-blue-600 text-base"
-          >
-            Saved
-          </Link>
+            <Link
+              href="/"
+              className="text-[#717171] hover:text-[#FF385C] text-[16px] font-medium transition"
+            >
 
-        </nav>
+              Home
 
-        {/* Login Button */}
+            </Link>
 
-        <Link
-          href="/login"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl text-sm font-medium"
-        >
+            <Link
+              href="/colleges"
+              className="text-[#717171] hover:text-[#FF385C] text-[16px] font-medium transition"
+            >
 
-          Login
+              Colleges
 
-        </Link>
+            </Link>
+
+            <Link
+              href="/compare"
+              className="text-[#717171] hover:text-[#FF385C] text-[16px] font-medium transition"
+            >
+
+              Compare
+
+            </Link>
+
+            <Link
+              href="/saved"
+              className="text-[#717171] hover:text-[#FF385C] text-[16px] font-medium transition"
+            >
+
+              Saved
+
+            </Link>
+
+          </nav>
+
+          {/* Right Side */}
+
+          <div className="flex items-center gap-4">
+
+            {/* Login Button */}
+
+            <Link
+              href="/login"
+              className="bg-[#FF385C] hover:bg-[#E31C5F] text-white px-5 py-2.5 rounded-xl text-[15px] font-semibold transition"
+            >
+
+              Login
+
+            </Link>
+
+          </div>
+
+        </div>
 
       </div>
 

@@ -1,17 +1,28 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { colleges }
 from "../../data/colleges";
 
+type College = {
+
+  id: string;
+  name: string;
+  location: string;
+  fees: string;
+  rating: number;
+  placements: string;
+
+};
+
 export default function ComparePage() {
 
   const [college1, setCollege1] =
-    useState(colleges[0]);
+    useState<College>(colleges[0]);
 
   const [college2, setCollege2] =
-    useState(colleges[1]);
+    useState<College>(colleges[1]);
 
   const [placementWeight,
     setPlacementWeight] =
@@ -26,7 +37,7 @@ export default function ComparePage() {
     useState(10);
 
   const calculateScore = (
-    college: any
+    college: College
   ) => {
 
     const placementScore =
@@ -44,9 +55,11 @@ export default function ComparePage() {
       10;
 
     return (
+
       placementScore +
       feesScore +
       ratingScore
+
     );
 
   };
@@ -64,25 +77,33 @@ export default function ComparePage() {
 
   return (
 
-    <main className="min-h-screen bg-white px-6 py-32">
+    <main className="min-h-screen bg-[#F7F7F7] px-8 py-36">
 
-      <div className="max-w-7xl mx-auto">
+      {/* Glow */}
+
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#FF385C]/10 blur-[120px] rounded-full"></div>
+
+      <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-pink-200 blur-[120px] rounded-full"></div>
+
+      <div className="relative z-10 max-w-[1400px] mx-auto">
 
         {/* Heading */}
 
-        <div className="text-center">
+        <div className="max-w-4xl">
 
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900">
+          <h1 className="text-[56px] md:text-[72px] leading-[1.05] font-bold tracking-tight text-[#222222]">
 
             Compare
 
-            <span className="block text-blue-600">
+            <span className="block text-[#FF385C]">
+
               Colleges
+
             </span>
 
           </h1>
 
-          <p className="mt-6 text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="mt-8 text-[#717171] text-xl max-w-2xl leading-relaxed">
 
             Compare placements, fees,
             ratings and discover the
@@ -94,28 +115,32 @@ export default function ComparePage() {
 
         {/* Sliders */}
 
-        <div className="bg-gray-50 border border-gray-200 rounded-3xl p-8 mt-14">
+        <div className="airbnb-card p-8 md:p-10 mt-16">
 
-          <h2 className="text-2xl font-semibold text-gray-900">
+          <h2 className="text-3xl font-bold text-[#222222]">
 
             Priority Weights
 
           </h2>
 
-          <div className="space-y-8 mt-8">
+          <div className="space-y-10 mt-10">
 
             {/* Placement */}
 
             <div>
 
-              <div className="flex justify-between mb-3">
+              <div className="flex justify-between mb-4">
 
-                <p className="text-gray-700">
+                <p className="text-[#717171] text-[16px]">
+
                   Placement
+
                 </p>
 
-                <p className="font-semibold">
+                <p className="font-semibold text-[16px]">
+
                   {placementWeight}%
+
                 </p>
 
               </div>
@@ -130,7 +155,7 @@ export default function ComparePage() {
                     Number(e.target.value)
                   )
                 }
-                className="w-full"
+                className="w-full accent-[#FF385C]"
               />
 
             </div>
@@ -139,14 +164,18 @@ export default function ComparePage() {
 
             <div>
 
-              <div className="flex justify-between mb-3">
+              <div className="flex justify-between mb-4">
 
-                <p className="text-gray-700">
+                <p className="text-[#717171] text-[16px]">
+
                   Fees
+
                 </p>
 
-                <p className="font-semibold">
+                <p className="font-semibold text-[16px]">
+
                   {feesWeight}%
+
                 </p>
 
               </div>
@@ -161,7 +190,7 @@ export default function ComparePage() {
                     Number(e.target.value)
                   )
                 }
-                className="w-full"
+                className="w-full accent-[#FF385C]"
               />
 
             </div>
@@ -170,14 +199,18 @@ export default function ComparePage() {
 
             <div>
 
-              <div className="flex justify-between mb-3">
+              <div className="flex justify-between mb-4">
 
-                <p className="text-gray-700">
+                <p className="text-[#717171] text-[16px]">
+
                   Rating
+
                 </p>
 
-                <p className="font-semibold">
+                <p className="font-semibold text-[16px]">
+
                   {ratingWeight}%
+
                 </p>
 
               </div>
@@ -192,7 +225,7 @@ export default function ComparePage() {
                     Number(e.target.value)
                   )
                 }
-                className="w-full"
+                className="w-full accent-[#FF385C]"
               />
 
             </div>
@@ -206,7 +239,7 @@ export default function ComparePage() {
         <div className="grid md:grid-cols-2 gap-6 mt-14">
 
           <select
-            className="border border-gray-300 rounded-2xl px-6 py-5 bg-white"
+            className="bg-white border border-[#DDDDDD] rounded-xl px-5 py-4 text-[15px] shadow-sm outline-none focus:border-[#FF385C] transition"
             onChange={(e) =>
               setCollege1(
                 colleges.find(
@@ -233,7 +266,7 @@ export default function ComparePage() {
           </select>
 
           <select
-            className="border border-gray-300 rounded-2xl px-6 py-5 bg-white"
+            className="bg-white border border-[#DDDDDD] rounded-xl px-5 py-4 text-[15px] shadow-sm outline-none focus:border-[#FF385C] transition"
             onChange={(e) =>
               setCollege2(
                 colleges.find(
@@ -263,19 +296,19 @@ export default function ComparePage() {
 
         {/* Compare Cards */}
 
-        <div className="grid md:grid-cols-2 gap-8 mt-16">
+        <div className="grid md:grid-cols-2 gap-10 mt-16">
 
           {/* College 1 */}
 
-          <div className={`border rounded-3xl p-8 ${
+          <div className={`airbnb-card p-8 hover:-translate-y-1 transition-all duration-300 ${
             bestCollege === college1.id
-              ? "border-green-500 bg-green-50"
-              : "border-gray-200"
+              ? "border-[#FF385C] shadow-[0_12px_30px_rgba(255,56,92,0.12)]"
+              : ""
           }`}>
 
             {bestCollege === college1.id && (
 
-              <div className="mb-6 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+              <div className="mb-6 inline-block bg-[#FFF1F2] text-[#FF385C] px-5 py-2 rounded-full text-sm font-semibold">
 
                 Best Match
 
@@ -283,21 +316,21 @@ export default function ComparePage() {
 
             )}
 
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-4xl font-bold text-[#222222]">
 
               {college1.name}
 
             </h2>
 
-            <div className="space-y-5 mt-8">
+            <div className="space-y-6 mt-10">
 
               <div className="flex justify-between">
 
-                <span className="text-gray-500">
+                <span className="text-[#717171]">
                   Location
                 </span>
 
-                <span className="font-medium">
+                <span className="font-semibold">
                   {college1.location}
                 </span>
 
@@ -305,11 +338,11 @@ export default function ComparePage() {
 
               <div className="flex justify-between">
 
-                <span className="text-gray-500">
+                <span className="text-[#717171]">
                   Fees
                 </span>
 
-                <span className="font-medium">
+                <span className="font-semibold">
                   {college1.fees}
                 </span>
 
@@ -317,35 +350,37 @@ export default function ComparePage() {
 
               <div className="flex justify-between">
 
-                <span className="text-gray-500">
+                <span className="text-[#717171]">
                   Rating
                 </span>
 
-                <span className="font-medium">
-                  {college1.rating}
+                <span className="font-semibold">
+                  ⭐ {college1.rating}
                 </span>
 
               </div>
 
               <div className="flex justify-between">
 
-                <span className="text-gray-500">
+                <span className="text-[#717171]">
                   Placement
                 </span>
 
-                <span className="font-medium">
+                <span className="font-semibold">
                   {college1.placements}
                 </span>
 
               </div>
 
-              <div className="pt-6 border-t border-gray-200">
+              <div className="pt-8 border-t border-[#DDDDDD]">
 
-                <p className="text-gray-500">
+                <p className="text-[#717171]">
+
                   Match Score
+
                 </p>
 
-                <h3 className="text-4xl font-bold text-blue-600 mt-2">
+                <h3 className="text-[52px] font-bold text-[#FF385C] mt-3">
 
                   {score1.toFixed(0)}
 
@@ -359,15 +394,15 @@ export default function ComparePage() {
 
           {/* College 2 */}
 
-          <div className={`border rounded-3xl p-8 ${
+          <div className={`airbnb-card p-8 md:p-10 transition-all duration-300 ${
             bestCollege === college2.id
-              ? "border-green-500 bg-green-50"
-              : "border-gray-200"
+              ? "border-[#FF385C] shadow-[0_12px_30px_rgba(255,56,92,0.12)]"
+              : ""
           }`}>
 
             {bestCollege === college2.id && (
 
-              <div className="mb-6 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+              <div className="mb-6 inline-block bg-[#FFF1F2] text-[#FF385C] px-5 py-2 rounded-full text-sm font-semibold">
 
                 Best Match
 
@@ -375,21 +410,21 @@ export default function ComparePage() {
 
             )}
 
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-4xl font-bold text-[#222222]">
 
               {college2.name}
 
             </h2>
 
-            <div className="space-y-5 mt-8">
+            <div className="space-y-6 mt-10">
 
               <div className="flex justify-between">
 
-                <span className="text-gray-500">
+                <span className="text-[#717171]">
                   Location
                 </span>
 
-                <span className="font-medium">
+                <span className="font-semibold">
                   {college2.location}
                 </span>
 
@@ -397,11 +432,11 @@ export default function ComparePage() {
 
               <div className="flex justify-between">
 
-                <span className="text-gray-500">
+                <span className="text-[#717171]">
                   Fees
                 </span>
 
-                <span className="font-medium">
+                <span className="font-semibold">
                   {college2.fees}
                 </span>
 
@@ -409,35 +444,37 @@ export default function ComparePage() {
 
               <div className="flex justify-between">
 
-                <span className="text-gray-500">
+                <span className="text-[#717171]">
                   Rating
                 </span>
 
-                <span className="font-medium">
-                  {college2.rating}
+                <span className="font-semibold">
+                  ⭐ {college2.rating}
                 </span>
 
               </div>
 
               <div className="flex justify-between">
 
-                <span className="text-gray-500">
+                <span className="text-[#717171]">
                   Placement
                 </span>
 
-                <span className="font-medium">
+                <span className="font-semibold">
                   {college2.placements}
                 </span>
 
               </div>
 
-              <div className="pt-6 border-t border-gray-200">
+              <div className="pt-8 border-t border-[#DDDDDD]">
 
-                <p className="text-gray-500">
+                <p className="text-[#717171]">
+
                   Match Score
+
                 </p>
 
-                <h3 className="text-4xl font-bold text-blue-600 mt-2">
+                <h3 className="text-[52px] font-bold text-[#FF385C] mt-3">
 
                   {score2.toFixed(0)}
 

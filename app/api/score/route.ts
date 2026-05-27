@@ -139,7 +139,7 @@ export async function POST(
 
       filtered =
         filtered.filter(
-          (college: any) =>
+          (college) =>
 
             college.stream ===
             filters.stream
@@ -152,7 +152,7 @@ export async function POST(
 
     const placementValues =
       filtered.map(
-        (c: any) =>
+        (c) =>
 
           parseInt(
             c.placements
@@ -162,7 +162,7 @@ export async function POST(
 
     const feeValues =
       filtered.map(
-        (c: any) =>
+        (c) =>
 
           parseInt(
 
@@ -175,7 +175,7 @@ export async function POST(
 
     const ratingValues =
       filtered.map(
-        (c: any) =>
+        (c) =>
           c.rating
       );
 
@@ -213,7 +213,7 @@ export async function POST(
 
     const ranked =
       filtered.map(
-        (college: any) => {
+        (college) => {
 
           const placement =
             parseInt(

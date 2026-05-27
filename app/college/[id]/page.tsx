@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { colleges }
 from "../../../data/colleges";
-
 type Props = {
 
   params: Promise<{
@@ -13,12 +13,8 @@ export default async function CollegeDetailPage({
   params,
 }: Props) {
 
-  // AWAIT PARAMS
-
   const { id } =
     await params;
-
-  // FIND COLLEGE
 
   const college =
     colleges.find(
@@ -32,9 +28,13 @@ export default async function CollegeDetailPage({
 
     return (
 
-      <div className="min-h-screen bg-black text-white flex items-center justify-center text-3xl">
+      <div className="min-h-screen bg-[#F7F7F7] flex items-center justify-center">
 
-        College Not Found
+        <h1 className="text-4xl font-bold text-[#222222]">
+
+          College Not Found
+
+        </h1>
 
       </div>
 
@@ -44,43 +44,80 @@ export default async function CollegeDetailPage({
 
   return (
 
-    <main className="min-h-screen bg-[#030712] text-white px-6 py-32">
+    <main className="relative min-h-screen bg-[#F7F7F7] px-6 md:px-8 py-36 overflow-hidden">
 
-      <div className="max-w-7xl mx-auto">
+      {/* Background Glow */}
 
-        {/* Image */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#FF385C]/10 blur-[120px] rounded-full"></div>
 
-        <img
-          src={college.image}
-          alt={college.name}
-          className="w-full h-[450px] object-cover rounded-3xl"
-        />
+      <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-pink-200 blur-[120px] rounded-full"></div>
 
-        {/* Content */}
+      <div className="relative z-10 max-w-[1400px] mx-auto">
 
-        <div className="mt-10">
+        {/* Hero Image */}
 
-          <h1 className="text-5xl font-bold">
+        <div className="overflow-hidden rounded-[32px] shadow-[0_10px_30px_rgba(0,0,0,0.12)]">
 
-            {college.name}
+          <Image
+  src={college.image}
+  alt={college.name}
+  width={1400}
+  height={700}
+  className="w-full h-[520px] object-cover hover:scale-[1.03] transition duration-700"
+  unoptimized
+/>
 
-          </h1>
+        </div>
 
-          <p className="mt-4 text-gray-400 text-xl">
+        {/* Main Content */}
 
-            📍 {college.location}
+        <div className="mt-14">
 
-          </p>
+          {/* Heading */}
 
-          <div className="grid md:grid-cols-3 gap-6 mt-10">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
 
-            <div className="bg-[#111827] p-6 rounded-2xl">
+            <div>
 
-              <p className="text-gray-400">
-                Fees
+              <h1 className="text-[56px] md:text-[72px] leading-[1.05] font-bold tracking-tight text-[#222222]">
+
+                {college.name}
+
+              </h1>
+
+              <p className="mt-5 text-[#717171] text-[20px]">
+
+                📍 {college.location}
+
               </p>
 
-              <h2 className="text-3xl font-bold mt-2 text-blue-400">
+            </div>
+
+            {/* Badge */}
+
+            <div className="bg-[#FFF1F2] text-[#FF385C] px-7 py-4 rounded-full text-[16px] font-semibold w-fit shadow-sm">
+
+              Top Ranked College
+
+            </div>
+
+          </div>
+
+          {/* Stats Cards */}
+
+          <div className="grid md:grid-cols-3 gap-8 mt-16">
+
+            {/* Fees */}
+
+            <div className="airbnb-card p-8 hover:-translate-y-1 transition-all duration-300">
+
+              <p className="text-[#717171] text-[16px]">
+
+                Annual Fees
+
+              </p>
+
+              <h2 className="text-[42px] font-bold mt-4 text-[#222222]">
 
                 ₹ {college.fees}
 
@@ -88,13 +125,17 @@ export default async function CollegeDetailPage({
 
             </div>
 
-            <div className="bg-[#111827] p-6 rounded-2xl">
+            {/* Rating */}
 
-              <p className="text-gray-400">
-                Rating
+            <div className="airbnb-card p-8 hover:-translate-y-1 transition-all duration-300">
+
+              <p className="text-[#717171] text-[16px]">
+
+                Student Rating
+
               </p>
 
-              <h2 className="text-3xl font-bold mt-2 text-yellow-400">
+              <h2 className="text-[42px] font-bold mt-4 text-[#222222]">
 
                 ⭐ {college.rating}
 
@@ -102,17 +143,70 @@ export default async function CollegeDetailPage({
 
             </div>
 
-            <div className="bg-[#111827] p-6 rounded-2xl">
+            {/* Placements */}
 
-              <p className="text-gray-400">
-                Placements
+            <div className="airbnb-card p-8 hover:-translate-y-1 transition-all duration-300">
+
+              <p className="text-[#717171] text-[16px]">
+
+                Placement Rate
+
               </p>
 
-              <h2 className="text-3xl font-bold mt-2 text-cyan-400">
+              <h2 className="text-[42px] font-bold mt-4 text-[#222222]">
 
                 {college.placements}%
 
               </h2>
+
+            </div>
+
+          </div>
+
+          {/* About Section */}
+
+          <div className="airbnb-card p-10 mt-16">
+
+            <h2 className="text-[40px] font-bold tracking-tight text-[#222222]">
+
+              About College
+
+            </h2>
+
+            <p className="mt-6 text-[#717171] text-[18px] leading-relaxed max-w-5xl">
+
+              {college.name} is one of India’s leading institutions known for academic excellence, modern infrastructure, strong placements and industry-focused education. Students gain access to experienced faculty, innovative learning opportunities, top recruiters and a vibrant campus environment designed to support both personal and professional growth.
+
+            </p>
+
+          </div>
+
+          {/* Recruiters */}
+
+          <div className="airbnb-card p-10 mt-16">
+
+            <h2 className="text-[40px] font-bold tracking-tight text-[#222222]">
+
+              Top Recruiters
+
+            </h2>
+
+            <div className="flex flex-wrap gap-4 mt-8">
+
+              {Array.isArray(college.recruiters) &&
+  college.recruiters.map(
+                (company, index) => (
+
+                <div
+                  key={index}
+                  className="bg-[#FFF1F2] text-[#FF385C] px-6 py-3 rounded-full text-[15px] font-semibold hover:bg-[#FFE4E8] transition"
+                >
+
+                  {company}
+
+                </div>
+
+              ))}
 
             </div>
 

@@ -4,64 +4,74 @@ export default function HomePage() {
 
   return (
 
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#F7F7F7]">
 
       {/* Hero */}
 
-      <section className="max-w-7xl mx-auto px-6 pt-40 pb-24">
+      <section className="relative overflow-hidden">
 
-        <div className="text-center">
+        {/* Soft Glow */}
 
-          <p className="text-blue-600 font-semibold text-lg">
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#FF385C]/10 blur-[120px] rounded-full"></div>
 
-            India’s Smart College Discovery Platform
+        <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-pink-200 blur-[120px] rounded-full"></div>
 
-          </p>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-40 pb-28">
 
-          <h1 className="mt-6 text-6xl md:text-7xl font-bold leading-tight text-gray-900">
+          <div className="text-center">
 
-            Discover Your
+            <p className="text-[#FF385C] font-semibold text-lg">
 
-            <span className="block text-blue-600">
+              India’s Smart College Discovery Platform
 
-              Dream College
+            </p>
 
-            </span>
+            <h1 className="mt-6 text-6xl md:text-7xl font-bold leading-tight text-[#222222] tracking-tight">
 
-          </h1>
+              Discover Your
 
-          <p className="mt-8 text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
+              <span className="block text-[#FF385C]">
 
-            Compare colleges, analyze placements,
-            explore courses and make smarter
-            admission decisions with AI-powered
-            insights.
+                Dream College
 
-          </p>
+              </span>
 
-          {/* Buttons */}
+            </h1>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-5 mt-12">
+            <p className="mt-8 text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
 
-            <Link href="/colleges">
+              Compare colleges, analyze placements,
+              explore courses and make smarter
+              admission decisions with AI-powered
+              insights.
 
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl text-lg font-semibold">
+            </p>
 
-                Explore Colleges
+            {/* Buttons */}
 
-              </button>
+            <div className="flex flex-col sm:flex-row justify-center gap-5 mt-12">
 
-            </Link>
+              <Link href="/colleges">
 
-            <Link href="/compare">
+                <button className="bg-[#FF385C] hover:bg-[#E31C5F] text-white px-10 py-5 rounded-2xl text-lg font-semibold transition shadow-sm hover:shadow-md">
 
-              <button className="border border-gray-300 hover:border-gray-500 px-10 py-5 rounded-2xl text-lg font-semibold text-gray-800">
+                  Explore Colleges
 
-                Compare Colleges
+                </button>
 
-              </button>
+              </Link>
 
-            </Link>
+              <Link href="/compare">
+
+                <button className="bg-white border border-gray-300 hover:border-gray-400 px-10 py-5 rounded-2xl text-lg font-semibold text-gray-800 transition">
+
+                  Compare Colleges
+
+                </button>
+
+              </Link>
+
+            </div>
 
           </div>
 
@@ -71,17 +81,39 @@ export default function HomePage() {
 
       {/* Features */}
 
-      <section className="bg-gray-50 py-24">
+      <section className="py-24">
 
         <div className="max-w-7xl mx-auto px-6">
+
+          <div className="text-center mb-16">
+
+            <h2 className="text-5xl font-bold text-[#222222]">
+
+              Why Choose CollegeHunt?
+
+            </h2>
+
+            <p className="mt-5 text-gray-600 text-lg">
+
+              Powerful tools to simplify your college journey.
+
+            </p>
+
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8">
 
             {/* Card 1 */}
 
-            <div className="bg-white border border-gray-200 rounded-3xl p-10">
+            <div className="bg-white border border-gray-200 rounded-3xl p-10 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
 
-              <h3 className="text-2xl font-bold text-gray-900">
+              <div className="w-14 h-14 bg-[#FFF1F2] rounded-2xl flex items-center justify-center text-2xl">
+
+                📊
+
+              </div>
+
+              <h3 className="text-2xl font-bold text-[#222222] mt-8">
 
                 College Comparison
 
@@ -99,9 +131,15 @@ export default function HomePage() {
 
             {/* Card 2 */}
 
-            <div className="bg-white border border-gray-200 rounded-3xl p-10">
+            <div className="bg-white border border-gray-200 rounded-3xl p-10 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
 
-              <h3 className="text-2xl font-bold text-gray-900">
+              <div className="w-14 h-14 bg-[#FFF1F2] rounded-2xl flex items-center justify-center text-2xl">
+
+                🤖
+
+              </div>
+
+              <h3 className="text-2xl font-bold text-[#222222] mt-8">
 
                 AI Score Engine
 
@@ -119,9 +157,15 @@ export default function HomePage() {
 
             {/* Card 3 */}
 
-            <div className="bg-white border border-gray-200 rounded-3xl p-10">
+            <div className="bg-white border border-gray-200 rounded-3xl p-10 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
 
-              <h3 className="text-2xl font-bold text-gray-900">
+              <div className="w-14 h-14 bg-[#FFF1F2] rounded-2xl flex items-center justify-center text-2xl">
+
+                🎯
+
+              </div>
+
+              <h3 className="text-2xl font-bold text-[#222222] mt-8">
 
                 Admission Predictor
 

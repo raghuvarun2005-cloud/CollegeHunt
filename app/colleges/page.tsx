@@ -6,6 +6,7 @@ import CollegeCard
 from "../../components/CollegeCard";
 
 type College = {
+
   id: string;
   name: string;
   location: string;
@@ -15,6 +16,7 @@ type College = {
   image: string;
   stream?: string;
   type?: string;
+
 };
 
 export default function CollegesPage() {
@@ -106,29 +108,29 @@ export default function CollegesPage() {
 
   return (
 
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="relative min-h-screen bg-[#F7F7F7] overflow-hidden">
 
-      <div className="max-w-7xl mx-auto px-6 py-32">
+      {/* Glow */}
 
-        {/* Heading */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#FF385C]/10 blur-[120px] rounded-full"></div>
 
-        <div className="text-center">
+      <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-pink-200 blur-[120px] rounded-full"></div>
 
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-8 py-36">
 
-            Discover Top
+        {/* Top Section */}
 
-            <span className="block text-blue-600">
-              Colleges
-            </span>
+        <div className="mb-14">
+
+          <h1 className="text-5xl font-bold tracking-tight text-[#222222]">
+
+            Explore Colleges
 
           </h1>
 
-          <p className="mt-6 text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-[#717171] text-lg">
 
-            Search, compare and shortlist colleges
-            based on placements, rankings and
-            career outcomes.
+            Find top colleges based on placements, fees and ratings.
 
           </p>
 
@@ -136,7 +138,7 @@ export default function CollegesPage() {
 
         {/* Search */}
 
-        <div className="max-w-3xl mx-auto mt-14">
+        <div className="w-full mt-10">
 
           <input
             type="text"
@@ -147,14 +149,14 @@ export default function CollegesPage() {
                 e.target.value
               )
             }
-            className="w-full bg-white border border-gray-300 rounded-2xl px-6 py-5 text-lg outline-none focus:border-blue-600"
+            className="w-full bg-white border border-[#DDDDDD] rounded-2xl px-7 py-5 text-lg outline-none shadow-sm focus:border-[#FF385C] transition"
           />
 
         </div>
 
         {/* Filters */}
 
-        <div className="flex flex-wrap gap-4 mt-8 justify-center">
+        <div className="flex flex-wrap gap-4 mt-8 justify-start">
 
           <select
             onChange={(e) =>
@@ -162,19 +164,31 @@ export default function CollegesPage() {
                 e.target.value
               )
             }
-            className="border border-gray-300 rounded-xl px-5 py-3 bg-white"
+            className="bg-white border border-[#DDDDDD] rounded-2xl px-5 py-3 shadow-sm outline-none focus:border-[#FF385C]"
           >
 
             <option value="">
+
               All Streams
+
             </option>
 
             <option value="Engineering">
+
               Engineering
+
             </option>
 
             <option value="Medical">
+
               Medical
+
+            </option>
+
+            <option value="MBA">
+
+              MBA
+
             </option>
 
           </select>
@@ -185,19 +199,25 @@ export default function CollegesPage() {
                 e.target.value
               )
             }
-            className="border border-gray-300 rounded-xl px-5 py-3 bg-white"
+            className="bg-white border border-[#DDDDDD] rounded-2xl px-5 py-3 shadow-sm outline-none focus:border-[#FF385C]"
           >
 
             <option value="">
+
               All Types
+
             </option>
 
             <option value="Government">
+
               Government
+
             </option>
 
             <option value="Private">
+
               Private
+
             </option>
 
           </select>
@@ -208,7 +228,7 @@ export default function CollegesPage() {
 
         {loading && (
 
-          <div className="text-center mt-20 text-xl text-gray-500">
+          <div className="text-center mt-20 text-xl text-[#717171]">
 
             Loading colleges...
 
@@ -220,7 +240,7 @@ export default function CollegesPage() {
 
         {!loading && (
 
-          <div className="grid md:grid-cols-2 gap-8 mt-16">
+          <div className="grid md:grid-cols-3 gap-8 mt-14">
 
             {filteredColleges.map(
               (college) => (
@@ -241,7 +261,7 @@ export default function CollegesPage() {
         {!loading &&
           filteredColleges.length === 0 && (
 
-          <div className="text-center mt-20 text-xl text-gray-500">
+          <div className="text-center mt-20 text-xl text-[#717171]">
 
             No colleges found.
 

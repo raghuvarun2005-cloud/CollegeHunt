@@ -81,9 +81,9 @@ export default function ReviewForm() {
 
   return (
 
-    <div className="bg-white border border-gray-200 rounded-3xl p-8">
+    <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
 
-      <h2 className="text-3xl font-bold text-gray-900">
+      <h2 className="text-3xl font-bold text-[#222222]">
 
         Student Review
 
@@ -105,7 +105,7 @@ export default function ReviewForm() {
               e.target.value
             )
           }
-          className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none"
+          className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:border-[#FF385C] transition"
           required
         />
 
@@ -120,7 +120,7 @@ export default function ReviewForm() {
               e.target.value
             )
           }
-          className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none"
+          className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:border-[#FF385C] transition"
           min="1"
           max="5"
           required
@@ -136,7 +136,7 @@ export default function ReviewForm() {
               e.target.value
             )
           }
-          className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none h-40 resize-none"
+          className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none h-40 resize-none focus:border-[#FF385C] transition"
           required
         />
 
@@ -144,7 +144,7 @@ export default function ReviewForm() {
 
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-semibold"
+          className="bg-[#FF385C] hover:bg-[#E31C5F] text-white px-8 py-4 rounded-2xl font-semibold transition"
         >
 
           Submit Review

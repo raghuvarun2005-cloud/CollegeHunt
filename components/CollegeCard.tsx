@@ -1,10 +1,11 @@
 "use client";
-
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
 
 type CollegeCardProps = {
+
   college: {
     id: string;
     name: string;
@@ -16,6 +17,7 @@ type CollegeCardProps = {
     stream?: string;
     type?: string;
   };
+
 };
 
 const CollegeCard = ({
@@ -27,20 +29,27 @@ const CollegeCard = ({
 
   useEffect(() => {
 
-    const existingColleges =
-      JSON.parse(
-        localStorage.getItem(
-          "savedColleges"
-        ) || "[]"
-      );
+    const timer = setTimeout(() => {
 
-    const alreadySaved =
-      existingColleges.some(
-        (item: any) =>
-          item.id === college.id
-      );
+      const existingColleges =
+        JSON.parse(
+          localStorage.getItem(
+            "savedColleges"
+          ) || "[]"
+        );
 
-    setSaved(alreadySaved);
+      const alreadySaved =
+        existingColleges.some(
+          (item: unknown) =>
+            (item as { id: string }).id === college.id
+        );
+
+      setSaved(alreadySaved);
+
+    }, 0);
+
+    return () =>
+      clearTimeout(timer);
 
   }, [college.id]);
 
@@ -57,8 +66,8 @@ const CollegeCard = ({
 
       const alreadyExists =
         existingColleges.some(
-          (item: any) =>
-            item.id === college.id
+          (item: unknown) =>
+            (item as { id: string }).id === college.id
         );
 
       // UNSAVE
@@ -67,8 +76,8 @@ const CollegeCard = ({
 
         const updatedColleges =
           existingColleges.filter(
-            (item: any) =>
-              item.id !== college.id
+            (item: unknown) =>
+              (item as { id: string }).id !== college.id
           );
 
         localStorage.setItem(
@@ -125,19 +134,41 @@ const CollegeCard = ({
 
   return (
 
-    <div className="bg-white border border-gray-200 rounded-3xl overflow-hidden">
+    <div className="airbnb-card overflow-hidden hover:shadow-[0_12px_28px_rgba(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300">
 
       {/* Image */}
 
-      <img
-        src={college.image}
-        alt={college.name}
-        className="w-full h-[240px] object-cover"
-      />
+      <div className="relative">
+
+        <Image
+  src={college.image}
+  alt={college.name}
+  width={600}
+  height={400}
+  className="w-full h-[240px] object-cover"
+  unoptimized
+/>
+
+        {/* Save Button */}
+
+        <button
+          onClick={handleSave}
+          className={`absolute top-5 right-5 w-11 h-11 rounded-full backdrop-blur-md border flex items-center justify-center text-lg transition ${
+            saved
+              ? "bg-white border-[#FF385C]"
+              : "bg-white/80 border-white"
+          }`}
+        >
+
+          ❤️
+
+        </button>
+
+      </div>
 
       {/* Content */}
 
-      <div className="p-8">
+      <div className="p-7">
 
         {/* Top */}
 
@@ -145,50 +176,37 @@ const CollegeCard = ({
 
           <div>
 
-            <h2 className="text-2xl font-bold text-gray-900">
+            <h2 className="text-[24px] leading-tight font-bold text-[#222222]">
 
               {college.name}
 
             </h2>
 
-            <p className="text-gray-500 mt-2">
+            <p className="text-[#717171] mt-3 text-[15px]">
 
-              {college.location}
+              📍 {college.location}
 
             </p>
 
           </div>
 
-          {/* Save Button */}
-
-          <button
-            onClick={handleSave}
-            className={`w-12 h-12 rounded-full border text-xl ${
-              saved
-                ? "bg-red-50 border-red-200"
-                : "border-gray-300"
-            }`}
-          >
-
-            ❤️
-
-          </button>
-
         </div>
 
         {/* Stats */}
 
-        <div className="grid grid-cols-3 gap-4 mt-8">
+        <div className="grid grid-cols-3 gap-3 mt-8">
 
-          <div className="bg-gray-50 rounded-2xl p-4">
+          {/* Fees */}
 
-            <p className="text-sm text-gray-500">
+          <div className="bg-[#F7F7F7] rounded-2xl p-4">
+
+            <p className="text-[13px] text-[#717171]">
 
               Fees
 
             </p>
 
-            <p className="text-lg font-semibold text-gray-900 mt-2">
+            <p className="text-[17px] font-semibold text-[#222222] mt-2">
 
               {college.fees}
 
@@ -196,33 +214,37 @@ const CollegeCard = ({
 
           </div>
 
-          <div className="bg-gray-50 rounded-2xl p-4">
+          {/* Rating */}
 
-            <p className="text-sm text-gray-500">
+          <div className="bg-[#F7F7F7] rounded-2xl p-4">
+
+            <p className="text-[13px] text-[#717171]">
 
               Rating
 
             </p>
 
-            <p className="text-lg font-semibold text-gray-900 mt-2">
+            <p className="text-[17px] font-semibold text-[#222222] mt-2">
 
-              {college.rating}
+              ⭐ {college.rating}
 
             </p>
 
           </div>
 
-          <div className="bg-gray-50 rounded-2xl p-4">
+          {/* Placement */}
 
-            <p className="text-sm text-gray-500">
+          <div className="bg-[#F7F7F7] rounded-2xl p-4">
+
+            <p className="text-[13px] text-[#717171]">
 
               Placement
 
             </p>
 
-            <p className="text-lg font-semibold text-gray-900 mt-2">
+            <p className="text-[17px] font-semibold text-[#222222] mt-2">
 
-              {college.placements}
+              {college.placements}%
 
             </p>
 
@@ -236,7 +258,7 @@ const CollegeCard = ({
 
           <Link href={`/college/${college.id}`}>
 
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-semibold">
+            <button className="w-full h-[54px] bg-[#FF385C] hover:bg-[#E31C5F] text-white rounded-xl text-[16px] font-semibold transition-all duration-200 hover:scale-[1.01]">
 
               View Details
 

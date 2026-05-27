@@ -67,7 +67,7 @@ export async function POST(
 
     });
 
-  } catch (error) {
+  } catch  {
 
     return NextResponse.json({
 

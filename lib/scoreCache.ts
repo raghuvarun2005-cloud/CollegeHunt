@@ -1,7 +1,7 @@
 declare global {
 
   var scoreCache:
-    Record<string, any>;
+    Record<string, unknown>;
 
 }
 
